@@ -2,12 +2,11 @@ import {
   Component,
   ElementRef,
   HostListener,
-  SimpleChanges,
   ViewChild,
-  OnChanges, OnInit,
 } from '@angular/core'
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { RouterOutlet } from '@angular/router'
+import { SendReqestObject } from './send-reqest-object'
 import { HireMeService } from './hire-me.service'
 
 @Component({
@@ -33,7 +32,7 @@ export class AppComponent {
   @ViewChild('tseModalBoundary') tseModalBoundary!: ElementRef<HTMLElement>
   @ViewChild('fseModalBoundary') fseModalBoundary!: ElementRef<HTMLElement>
 
-  constructor(private _formBuilder: FormBuilder, private hireMeService: HireMeService) {
+  constructor(private _formBuilder: FormBuilder, private _hireMeService: HireMeService) {
     this.sendRequestForm = this._formBuilder.group({
       frontEnd: '',
       backEnd: '',
@@ -45,24 +44,24 @@ export class AppComponent {
   }
 
   public onSubmit(): void {
-    this.hireMeService.sendRequest()
-    console.log('Form submitted')
+    const payload = this.transformFormData(this.sendRequestForm)
+    this._hireMeService.sendRequest(payload)
   }
 
   public openModal(modalType: 'teacher' | 'tse' | 'fse'): void {
     switch (modalType) {
-      case 'teacher':
-        this.teacherModalElement.nativeElement.style.display = 'block'
-        this.currentModal = 'teacher'
-        break
-      case 'tse':
-        this.tseModalElement.nativeElement.style.display = 'block'
-        this.currentModal = 'tse'
-        break
-      case 'fse':
-        this.fseModalElement.nativeElement.style.display = 'block'
-        this.currentModal = 'fse'
-        break
+    case 'teacher':
+      this.teacherModalElement.nativeElement.style.display = 'block'
+      this.currentModal = 'teacher'
+      break
+    case 'tse':
+      this.tseModalElement.nativeElement.style.display = 'block'
+      this.currentModal = 'tse'
+      break
+    case 'fse':
+      this.fseModalElement.nativeElement.style.display = 'block'
+      this.currentModal = 'fse'
+      break
     }
 
     this.isModalOpen = true
@@ -101,4 +100,17 @@ export class AppComponent {
       this.fseModalBoundary.nativeElement.contains(target)
     )
   }
+
+  private transformFormData(formGroup: FormGroup): SendReqestObject {
+    const myObject = { ...formGroup.value }
+    Object.entries(myObject).forEach(([key, value]) => {
+      if (value === true) {
+        myObject[key] = `${key}`
+      } else if (value === false) {
+        myObject[key] = ''
+      }
+    })
+    return myObject
+  }
+
 }

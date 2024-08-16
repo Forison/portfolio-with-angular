@@ -366,7 +366,7 @@
                 <form class="work-request" [formGroup]="sendRequestForm" (ngSubmit)="onSubmit()">
                   <div class="work-request--options">
                     <span class="options-a">
-                      <input id="opt-2" type="checkbox" value="FrontEnd" />
+                      <input id="opt-2" type="checkbox" value="FrontEnd" formControlName="frontEnd" />
                       <label for="opt-2">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                           xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 111"
@@ -378,7 +378,7 @@
                         </svg>
                         Front-end
                       </label>
-                      <input id="opt-3" type="checkbox" value="BackEnd" />
+                      <input id="opt-3" type="checkbox" value="BackEnd" formControlName="backEnd" />
                       <label for="opt-3">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                           xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 111"
@@ -392,7 +392,7 @@
                       </label>
                     </span>
                     <span class="options-b">
-                      <input id="opt-4" type="checkbox" value="FullStack" />
+                      <input id="opt-4" type="checkbox" value="FullStack" formControlName="fullStack" />
                       <label for="opt-4">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                           xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 111"
@@ -404,7 +404,7 @@
                         </svg>
                         Full-stack
                       </label>
-                      <input id="opt-5" type="checkbox" value="DevOps" />
+                      <input id="opt-5" type="checkbox" value="DevOps" formControlName="devOps" />
                       <label for="opt-5">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                           xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 111"
@@ -424,7 +424,7 @@
                       <label for="name">Name</label>
                     </div>
                     <div class="information-email">
-                      <input id="email" type="email" spellcheck="false" formControlEmail="email">
+                      <input id="email" type="email" spellcheck="false" formControlName="email">
                       <label for="email">Email</label>
                     </div>
                   </div>
