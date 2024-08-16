@@ -1258,25 +1258,21 @@ img[alt="Global"] {
   height: 100px;
   text-decoration: none;
   color: #fff;
-  border: 10px solid #000;
+  border: 10px solid blue;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat
 }
 
-.about--options>a:nth-child(1) {
+#tch {
   background-image: url("../img/about-teacher.png")
 }
 
-.about--options>a:nth-child(2) {
-  background-image: url("../img/about-mentor.png")
-}
-
-.about--options>a:nth-child(3) {
+#tse {
   background-image: url("../img/about-tse.png")
 }
 
-.about--options>a:nth-child(4) {
+#fse {
   background-image: url("../img/about-fullstack.png")
 }
 
