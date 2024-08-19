@@ -1,1 +1,1 @@
-This is my peeersonal portfolio built with angular
+This is my personal portfolio built with angular
