@@ -1,6 +1,5 @@
 .DS_STORE
-
-/dist/
+xs
 /bazel-out
 /integration/bazel/bazel-*
 *.log
@@ -33,7 +32,6 @@ modules/.vscode
 *secret.js
 
 # Ignore npm/yarn debug log
-npm-debug.log
 yarn-error.log
 
 # build-analytics
