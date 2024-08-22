@@ -8,6 +8,7 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angula
 import { RouterOutlet } from '@angular/router'
 import { SendReqestObject } from './send-reqest-object'
 import { HireMeService } from './hire-me.service'
+import { BehaviorSubject, of, timeout } from 'rxjs'
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,8 @@ export class AppComponent {
   private currentModal = ''
   private isModalOpen = false
   private clickOutside = false
+  private submissionSubject = new BehaviorSubject<boolean>(false)
+  public isSuccess$ = this.submissionSubject.asObservable()
 
   // Modal Elements
   @ViewChild('teacherModal') teacherModalElement!: ElementRef<HTMLElement>
@@ -43,25 +46,34 @@ export class AppComponent {
     })
   }
 
-  public onSubmit(): void {
+  public async onSubmit() {
     const payload = this.transformFormData(this.sendRequestForm)
-    this._hireMeService.sendRequest(payload)
+    const response = await this._hireMeService.sendRequest(payload)
+    if (response === 'OK') {
+      this.submissionSubject.next(true)
+      console.log(this.submissionSubject.value)
+      setTimeout(() => {
+        this.submissionSubject.next(false)
+      }, 2000);
+    }
+    console.log(this.submissionSubject.value)
+    console.log(response)
   }
 
   public openModal(modalType: 'teacher' | 'tse' | 'fse'): void {
     switch (modalType) {
-    case 'teacher':
-      this.teacherModalElement.nativeElement.style.display = 'block'
-      this.currentModal = 'teacher'
-      break
-    case 'tse':
-      this.tseModalElement.nativeElement.style.display = 'block'
-      this.currentModal = 'tse'
-      break
-    case 'fse':
-      this.fseModalElement.nativeElement.style.display = 'block'
-      this.currentModal = 'fse'
-      break
+      case 'teacher':
+        this.teacherModalElement.nativeElement.style.display = 'block'
+        this.currentModal = 'teacher'
+        break
+      case 'tse':
+        this.tseModalElement.nativeElement.style.display = 'block'
+        this.currentModal = 'tse'
+        break
+      case 'fse':
+        this.fseModalElement.nativeElement.style.display = 'block'
+        this.currentModal = 'fse'
+        break
     }
 
     this.isModalOpen = true

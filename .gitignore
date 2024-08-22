@@ -62,3 +62,5 @@ baseline.json
 # Ignore AIO files, useful when changing branches 
 aio/node_modules
 aio/out-tsc
+src/environments/environment.ts
+src/environments/environment.prod.ts

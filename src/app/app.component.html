@@ -428,7 +428,12 @@
                       <label for="email">Email</label>
                     </div>
                   </div>
-                  <input type="submit" value="Send Request">
+                  @if (!(isSuccess$)) {
+                  Message was delivered successfully
+                  }@else {
+                  <input type="submit" value="Send Request" />
+                  }
+
                   <!-- <button class="work-request" type="submit">Send Request</button> -->
                 </form>
               </div>

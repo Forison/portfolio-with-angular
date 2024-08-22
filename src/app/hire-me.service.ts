@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import emailjs from '@emailjs/browser'
 import { SendReqestObject } from './send-reqest-object'
+import { environment } from '../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +9,14 @@ import { SendReqestObject } from './send-reqest-object'
 export class HireMeService {
   public async sendRequest(payload: SendReqestObject): Promise<string> {
     const { name, email, frontEnd, backEnd, devOps, fullStack } = payload
-    // deliberate exposure of key in other to use the free email service without using a backend
-    emailjs.init('CKvXQLxOKMxQKmN42')
+    emailjs.init(environment.MAIL_INIT)
     try {
-      const response = await emailjs.send('service_k2wo2tv', 'template_c36u47c', {
+      const response = await emailjs.send(environment.MAIL_SERVICE, environment.MAIL_TEMPLATE, {
         sender_name: name,
         skill_set: [frontEnd, backEnd, fullStack, devOps].join(','),
         sender_email: email,
       })
-
+      console.log(response)
       return response.text
     } catch (error) {
       console.log(error)
