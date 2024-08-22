@@ -27,6 +27,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/_redirects",
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -34,9 +35,14 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/app/app.component.scss"
+              "src/app/app.component.scss",
+              "src/assets/css/main.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/js/vendor/jquery-2.2.4.min.js",
+              "src/assets/js/functions-min.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -110,7 +116,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/app.component.scss",
+              "src/assets/css/main.scss"
             ],
             "scripts": []
           }

@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostListener,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core'
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { RouterOutlet } from '@angular/router'
@@ -15,7 +16,8 @@ import { BehaviorSubject, of, timeout } from 'rxjs'
   standalone: true,
   imports: [RouterOutlet, ReactiveFormsModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
   public sendRequestForm: FormGroup
@@ -52,9 +54,9 @@ export class AppComponent {
     if (response === 'OK') {
       this.submissionSubject.next(true)
       console.log(this.submissionSubject.value)
-      setTimeout(() => {
-        this.submissionSubject.next(false)
-      }, 2000);
+      // setTimeout(() => {
+      //   this.submissionSubject.next(false)
+      // }, 2000);
     }
     console.log(this.submissionSubject.value)
     console.log(response)
